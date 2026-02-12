@@ -23,7 +23,7 @@ function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your emai"
+              placeholder="Enter your email"
               required
             />
           </div>
