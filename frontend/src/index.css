@@ -206,6 +206,34 @@ body {
   background: rgba(79, 70, 229, 0.08);
 }
 
+.btn-google {
+  width: 100%;
+  background: #ea4335;
+  border: none;
+  color: white;
+}
+
+.btn-google:hover {
+  background: #d33426;
+}
+
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #606770;
+  font-size: 14px;
+}
+
+.divider-with-text::before,
+.divider-with-text::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #dadde1;
+}
+
 .auth-sub {
   font-size: 14px;
   color: #606770;

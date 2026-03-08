@@ -12,6 +12,10 @@ export default function SignUpPage() {
     navigate('/verify', { state: { email: email.trim() } });
   };
 
+  const handleGoogle = () => {
+    console.log('Sign up with Google - TODO');
+  };
+
   return (
     <div className="auth-box-page auth-box-page--short">
       <div className="auth-box-wrapper">
@@ -36,6 +40,10 @@ export default function SignUpPage() {
                 </button>
               </p>
               <button type="submit" className="btn-primary">Verify</button>
+              <div className="divider-with-text">Or sign up with</div>
+              <button type="button" className="btn-google" onClick={handleGoogle}>
+                Google
+              </button>
             </form>
           </div>
         </div>

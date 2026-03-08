@@ -7,6 +7,15 @@ const morgan = require('morgan');
 const connectDB = require('./lib/db');
 const indexRouter = require('./routers/index');
 
+// Load models (registers schemas with Mongoose; collections created on first insert)
+require('./models/User');
+require('./models/Chat');
+require('./models/Message');
+require('./models/Post');
+require('./models/Comment');
+require('./models/VideoCall');
+require('./models/Notification');
+
 connectDB();
 
 const app = express();

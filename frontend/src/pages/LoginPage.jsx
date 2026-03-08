@@ -13,6 +13,10 @@ export default function LoginPage() {
     console.log('Login with:', { email, password });
   };
 
+  const handleGoogle = () => {
+    console.log('Login with Google - TODO');
+  };
+
   return (
     <div className="auth-page-wrapper">
       <div className="auth-page">
@@ -48,6 +52,10 @@ export default function LoginPage() {
             </div>
             <button type="submit" className="btn-primary">Log in</button>
             <a href="#" className="forgot-password">Forgotten password?</a>
+            <div className="divider-with-text">Or sign in with</div>
+            <button type="button" className="btn-google" onClick={handleGoogle}>
+              Google
+            </button>
             <div className="divider"></div>
             <button type="button" className="btn-secondary" onClick={() => navigate('/signup')}>Create new account</button>
           </form>
