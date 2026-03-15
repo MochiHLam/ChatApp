@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '../components/auth-comp/Footer';
 
-export default function VerifyPage() {
+export default function ForgotVerifyPage() {
   const [code, setCode] = useState('');
   const [timeLeft, setTimeLeft] = useState(60);
   const navigate = useNavigate();
   const location = useLocation();
-  const email = location.state?.email || 'test@example.com';
+  const email = location.state?.email;
+
+  useEffect(() => {
+    if (!email) {
+      navigate('/forgot-password', { replace: true });
+      return;
+    }
+  }, [email, navigate]);
 
   useEffect(() => {
     if (timeLeft <= 0) return;
@@ -15,10 +22,10 @@ export default function VerifyPage() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const handleConfirm = (e) => {
+  const handleVerify = (e) => {
     e.preventDefault();
     if (code.length !== 6 || !email) return;
-    navigate('/register', { state: { email } });
+    navigate('/reset-password', { state: { email, code } });
   };
 
   const handleResend = () => {
@@ -27,20 +34,22 @@ export default function VerifyPage() {
     console.log('Resend code to', email);
   };
 
+  if (!email) return null;
+
   return (
     <div className="w-full min-h-screen flex flex-col bg-[#f0f2f5] p-5">
       <div className="flex flex-col items-center flex-1">
         <div className="w-full flex justify-center pt-6 pb-41">
           <div className="w-full max-w-[540px] flex-shrink-0 bg-white rounded-lg p-10 shadow-[0_2px_4px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.1)]">
             <h2 className="text-2xl font-bold text-center text-[#1c1e21] mb-2">
-              Verify your email
+              Reset password
             </h2>
             <p className="text-sm text-[#606770] text-center mb-10">
-              We sent a 6-digit code to your email
+              We sent a 6-digit code to your email. Enter it below.
             </p>
             <form
               className="flex flex-col w-full gap-8"
-              onSubmit={handleConfirm}
+              onSubmit={handleVerify}
               noValidate
             >
               <div className="flex flex-col gap-1.5 relative">
@@ -84,7 +93,7 @@ export default function VerifyPage() {
                 className="px-3 py-2.5 text-base font-semibold rounded-full border-none bg-indigo-600 text-white cursor-pointer transition-colors duration-150 hover:bg-indigo-700 active:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={code.length !== 6 || timeLeft <= 0}
               >
-                Confirm
+                Verify
               </button>
             </form>
           </div>

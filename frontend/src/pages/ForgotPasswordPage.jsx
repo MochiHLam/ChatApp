@@ -2,31 +2,30 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/auth-comp/Footer';
 
-export default function SignUpPage() {
+export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleVerify = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.trim()) return;
-    navigate('/verify', { state: { email: email.trim() } });
-  };
-
-  const handleGoogle = () => {
-    console.log('Sign up with Google - TODO');
+    navigate('/forgot-verify', { state: { email: email.trim() } });
   };
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-[#f0f2f5] p-5">
       <div className="flex flex-col items-center flex-1">
-        <div className="w-full flex justify-center pt-6 pb-26">
+        <div className="w-full flex justify-center pt-6 pb-43">
           <div className="w-full max-w-[540px] flex-shrink-0 bg-white rounded-lg p-10 shadow-[0_2px_4px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.1)]">
             <h2 className="text-2xl font-bold text-center text-[#1c1e21] mb-2">
-              Sign up
+              Forgot password?
             </h2>
+            <p className="text-sm text-[#606770] text-center mb-10">
+              Enter your email and we&apos;ll send you a 6-digit code to reset your password.
+            </p>
             <form
               className="flex flex-col w-full gap-8"
-              onSubmit={handleVerify}
+              onSubmit={handleSubmit}
               noValidate
             >
               <div className="flex flex-col gap-1.5 relative">
@@ -46,34 +45,22 @@ export default function SignUpPage() {
                   Email address
                 </label>
               </div>
-              <p className="text-sm text-[#606770]">
-                Already have an account?{' '}
+              <button
+                type="submit"
+                className="px-3 py-2.5 text-base font-semibold rounded-full border-none bg-indigo-600 text-white cursor-pointer transition-colors duration-150 hover:bg-indigo-700 active:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={!email.trim()}
+              >
+                Send reset code
+              </button>
+              <p className="text-sm text-[#606770] text-center">
                 <button
                   type="button"
                   className="bg-transparent border-none text-indigo-600 font-semibold cursor-pointer hover:underline p-0"
                   onClick={() => navigate('/login')}
                 >
-                  Login
+                  Back to Login
                 </button>
               </p>
-              <button
-                type="submit"
-                className="px-3 py-2.5 text-base font-semibold rounded-full border-none bg-indigo-600 text-white cursor-pointer transition-colors duration-150 hover:bg-indigo-700 active:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
-              >
-                Verify
-              </button>
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-px bg-[#dadde1]" />
-                <span className="text-sm text-[#606770]">Or sign up with</span>
-                <div className="flex-1 h-px bg-[#dadde1]" />
-              </div>
-              <button
-                type="button"
-                className="w-full px-3 py-2.5 text-base font-semibold rounded-full border-none bg-[#ea4335] text-white cursor-pointer transition-colors duration-150 hover:bg-[#d33426]"
-                onClick={handleGoogle}
-              >
-                Google
-              </button>
             </form>
           </div>
         </div>
